@@ -6,6 +6,20 @@ import {
   readFile,
   readFileSchema,
 } from "./tools/readFile.js";
+import {
+  writeFile,
+  writeFileSchema,
+} from "./tools/writeFile.js";
+
+import {
+  deleteFile,
+  deleteFileSchema,
+} from "./tools/deleteFile.js";
+
+import {
+  searchFiles,
+  searchFilesSchema,
+} from "./tools/searchFiles.js";
 
 const server = new McpServer({
   name: "file-vault",
@@ -25,6 +39,32 @@ server.registerTool(
       },
     ],
   })
+);
+server.registerTool(
+  "write_file",
+  {
+    description: "Write file",
+    inputSchema: writeFileSchema,
+  },
+  writeFile
+);
+
+server.registerTool(
+  "delete_file",
+  {
+    description: "Delete file",
+    inputSchema: deleteFileSchema,
+  },
+  deleteFile
+);
+
+server.registerTool(
+  "search_files",
+  {
+    description: "Search files",
+    inputSchema: searchFilesSchema,
+  },
+  searchFiles
 );
 
 
