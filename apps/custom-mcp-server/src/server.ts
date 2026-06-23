@@ -27,6 +27,23 @@ const server = new McpServer({
 });
 
 server.registerTool(
+  "list_files",
+  {
+    description: "List files in sandbox",
+  },
+  async () => await listFiles()
+);
+
+server.registerTool(
+  "read_file",
+  {
+    description: "Read file from sandbox",
+    inputSchema: readFileSchema,
+  },
+  readFile
+);
+
+server.registerTool(
   "ping",
   {
     description: "Simple health check",

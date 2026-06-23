@@ -5,11 +5,44 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+model Policy {
+  id        String   @id @default(cuid())
+
+  type      String
+  toolName  String?
+  value     String?
+
+  enabled   Boolean @default(true)
+
+  createdAt DateTime @default(now())
+}
+model AuditLog {
+  id         String   @id @default(cuid())
+
+  toolName   String
+  serverId   String
+
+  allowed    Boolean
+  reason     String?
+
+  createdAt  DateTime @default(now())
+}
+model ApprovalRequest {
+  id         String   @id @default(cuid())
+
+  toolName   String
+  serverId   String
+
+  arguments  Json
+
+  status     String   @default("PENDING")
+
+  createdAt  DateTime @default(now())
 }

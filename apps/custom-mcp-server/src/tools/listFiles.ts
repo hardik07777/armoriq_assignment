@@ -7,7 +7,7 @@ export async function listFiles() {
   return {
     content: [
       {
-        type: "text",
+        type: "text" as const,
         text: JSON.stringify(files, null, 2),
       },
     ],
