@@ -25,6 +25,19 @@ export class MCPManager {
     );
   }
 
+
+async executeToolDirect(
+  serverId: string,
+  toolName: string,
+  args: Record<string, unknown>
+) {
+  const client = await this.getClient(serverId);
+
+  return client.callTool({
+    name: toolName,
+    arguments: args,
+  });
+}
 async executeTool(
   serverId: string,
   toolName: string,
@@ -77,12 +90,11 @@ async executeTool(
     allowed: true,
   });
 
-  const client = await this.getClient(serverId);
-
-  return client.callTool({
-    name: toolName,
-    arguments: args,
-  });
+ return this.executeToolDirect(
+  serverId,
+  toolName,
+  args
+);
 }
   async discoverTools(): Promise<MCPTool[]> {
     const discovered: MCPTool[] = [];

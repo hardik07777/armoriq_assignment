@@ -22,6 +22,12 @@ export async function writeFile(args: {
     throw new Error("Access denied");
   }
 
+  // Ensure directory exists
+  await fs.mkdir(
+    path.dirname(filePath),
+    { recursive: true }
+  );
+
   await fs.writeFile(
     filePath,
     args.content,

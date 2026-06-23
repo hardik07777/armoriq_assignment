@@ -48,4 +48,9 @@ export class ApprovalService {
       },
     });
   }
+  async getRequestById(id: string) {
+  return prisma.approvalRequest.findUnique({
+    where: { id },
+  });
+}
 }
