@@ -39,6 +39,41 @@ export class PolicyEngine {
       reason: `${request.toolName} is blocked by policy`,
     };
   }
+  const pathPolicy =
+  await prisma.policy.findFirst({
+    where: {
+      enabled: true,
+      type: "PATH_RESTRICTION",
+      toolName: request.toolName,
+    },
+  });
+
+if (pathPolicy) {
+  const fileName =
+    request.args.fileName;
+
+  if (typeof fileName !== "string") {
+    return {
+      action: "BLOCK",
+      reason: "Missing fileName",
+    };
+  }
+
+  const allowedPrefix =
+    pathPolicy.value ?? "";
+
+  if (
+    !fileName.startsWith(
+      allowedPrefix
+    )
+  ) {
+    return {
+      action: "BLOCK",
+      reason:
+        "Path restriction violation",
+    };
+  }
+}
 
   const approvalPolicy =
     await prisma.policy.findFirst({
