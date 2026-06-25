@@ -7,7 +7,8 @@ import ChatInput from "./ChatInput";
 import TypingIndicator from "./TypingIndicator";
 import AgentResponseCard from "./AgentResponseCard";
 
-const API = "http://localhost:5000/api";
+const API =
+process.env.NEXT_PUBLIC_API_URL!;
 
 interface ChatMessage {
   type: "user" | "assistant";
