@@ -6,9 +6,26 @@ export const servers: MCPServerConfig[] = [
     name: "File Vault",
     transport: "stdio",
 
-    command: "npm",
-    args: ["run", "dev"],
+    command: "C:\\Program Files\\nodejs\\npx.cmd",
+
+    args: [
+      "tsx",
+      "src/server.ts",
+    ],
 
     cwd: "../custom-mcp-server",
+  },
+
+  {
+    id: "context7",
+    name: "Context7",
+    transport: "stdio",
+
+    command: "C:\\Program Files\\nodejs\\npx.cmd",
+
+    args: [
+      "-y",
+      "@upstash/context7-mcp",
+    ],
   },
 ];
