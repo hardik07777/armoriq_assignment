@@ -6,7 +6,7 @@ export const servers: MCPServerConfig[] = [
     name: "File Vault",
     transport: "stdio",
 
-    command: "C:\\Program Files\\nodejs\\npx.cmd",
+    command: "npx",
 
     args: [
       "tsx",
@@ -21,7 +21,7 @@ export const servers: MCPServerConfig[] = [
     name: "Context7",
     transport: "stdio",
 
-    command: "C:\\Program Files\\nodejs\\npx.cmd",
+    command: "npx",
 
     args: [
       "-y",
