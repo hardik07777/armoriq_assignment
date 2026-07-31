@@ -11,7 +11,7 @@ export default function ApprovalActions({
 
   async function approve() {
     await fetch(
-      `http://localhost:5000/api/approvals/${id}/approve`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/approvals/${id}/approve`,
       {
         method: "POST",
       }
@@ -22,7 +22,7 @@ export default function ApprovalActions({
 
   async function reject() {
     await fetch(
-      `http://localhost:5000/api/approvals/${id}/reject`,
+`${process.env.NEXT_PUBLIC_API_URL}/api/approvals/${id}/reject`,
       {
         method: "POST",
       }

@@ -13,7 +13,7 @@ export default function DeletePolicy({
     if (!confirm("Delete policy?")) return;
 
     await fetch(
-      `http://localhost:5000/api/policies/${id}`,
+`${process.env.NEXT_PUBLIC_API_URL}/api/policies/${id}`,
       {
         method: "DELETE",
       }
