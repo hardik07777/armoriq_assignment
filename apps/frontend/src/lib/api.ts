@@ -1,6 +1,4 @@
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL!;
-
+const API_BASE_URL = "http://localhost:5000";
 export async function getApprovals() {
   const res = await fetch(`${API_BASE_URL}/api/approvals`, {
     cache: "no-store",

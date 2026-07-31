@@ -33,6 +33,8 @@ console.log(
   !!process.env.GOOGLE_API_KEY
 );
 
-app.listen(5000, () => {
-  console.log("Agent backend running");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Agent backend running on ${PORT}`);
 });
