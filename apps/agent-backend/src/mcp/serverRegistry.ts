@@ -17,17 +17,4 @@ export const servers: MCPServerConfig[] = [
 
     cwd: "../custom-mcp-server",
   },
-
-  {
-    id: "context7",
-    name: "Context7",
-    transport: "stdio",
-
-    command: "npx",
-
-    args: [
-      "-y",
-      "@upstash/context7-mcp",
-    ],
-  },
 ];
