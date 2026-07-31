@@ -1,9 +1,12 @@
 import CreatePolicyForm from "../../src/components/CreatePolicyForm";
 import PolicyCard from "../../src/components/PolicyCard";
 
+const API =
+  process.env.NEXT_PUBLIC_API_URL!;
+
 async function getPolicies() {
   const res = await fetch(
-    "http://localhost:5000/api/policies",
+    `${API}/api/policies`,
     {
       cache: "no-store",
     }

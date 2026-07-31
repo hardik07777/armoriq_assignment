@@ -6,10 +6,10 @@ export const servers: MCPServerConfig[] = [
     name: "File Vault",
     transport: "stdio",
 
-command: process.platform === "win32"
-  ? "npx.cmd"
-  : "npx",
-  
+    command: process.platform === "win32"
+      ? "npx.cmd"
+      : "npx",
+
     args: [
       "tsx",
       "src/server.ts",
@@ -23,7 +23,7 @@ command: process.platform === "win32"
     name: "Context7",
     transport: "stdio",
 
-    command: "C:\\Program Files\\nodejs\\npx.cmd",
+    command: "npx",
 
     args: [
       "-y",
