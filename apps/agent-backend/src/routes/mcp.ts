@@ -1,5 +1,5 @@
 import { Router } from "express";
-import  { MCPManager } from "../mcp/manager.js";
+import { mcpManager } from "../mcp/index.js";
 import { AuditService } from "../audit/auditService.js";
 
 const router = Router();
@@ -7,10 +7,8 @@ const router = Router();
 router.get(
   "/mcp/tools",
   async (_, res) => {
-    const manager = new MCPManager();
-
     const tools =
-      await manager.discoverTools();
+  await mcpManager.discoverTools();
 
     res.json(tools);
   }
@@ -26,15 +24,12 @@ router.post(
         arguments: args,
       } = req.body;
 
-      const manager =
-        new MCPManager();
-
       const result =
-        await manager.executeTool(
-          serverId,
-          toolName,
-          args ?? {}
-        );
+  await mcpManager.executeTool(
+    serverId,
+    toolName,
+    args ?? {}
+  );
 
       res.json(result);
     } catch (error) {

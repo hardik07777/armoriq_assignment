@@ -23,7 +23,26 @@ export interface ExecuteToolResult {
 }
 
 export class MCPManager {
+  private clients = new Map<
+    string,
+    Awaited<ReturnType<typeof connectToServer>>
+  >();
+  private discoveredTools: MCPTool[] | null = null;
+
+
+  private policyEngine = new PolicyEngine();
+
+  private auditService = new AuditService();
+
+  private approvalService = new ApprovalService();
+
   private async getClient(serverId: string) {
+    const existing = this.clients.get(serverId);
+
+    if (existing) {
+      return existing;
+    }
+
     const server = servers.find(
       (s) => s.id === serverId
     );
@@ -34,13 +53,16 @@ export class MCPManager {
       );
     }
 
-    return connectToServer(
+    const client = await connectToServer(
       server.command!,
       server.args ?? [],
       server.cwd
     );
-  }
 
+    this.clients.set(serverId, client);
+
+    return client;
+  }
   async executeToolDirect(
     serverId: string,
     toolName: string,
@@ -64,15 +86,7 @@ export class MCPManager {
 
     const start = Date.now();
 
-    const policyEngine =
-      new PolicyEngine();
-
-    const auditService =
-      new AuditService();
-
-    const approvalService =
-      new ApprovalService();
-
+  
 const request = {
   toolName,
   args,
@@ -80,14 +94,13 @@ const request = {
 };
 
 const decision =
-  await policyEngine.evaluate(request);
-
+  await this.policyEngine.evaluate(request);
     // BLOCK
 
     if (decision.action === "BLOCK") {
 
-      await auditService.log({
-        toolName,
+await this.auditService.log({
+          toolName,
         serverId,
         allowed: false,
         reason: decision.reason,
@@ -115,14 +128,14 @@ const decision =
       "REQUIRE_APPROVAL"
     ) {
 
-      await approvalService.createRequest({
+await this.approvalService.createRequest({
         toolName,
         serverId,
         arguments:
           args as Prisma.InputJsonValue,
       });
 
-      await auditService.log({
+      await this.auditService.log({
         toolName,
         serverId,
         allowed: false,
@@ -146,7 +159,7 @@ const decision =
 
     // ALLOW
 
-    await auditService.log({
+    await this.auditService.log({
       toolName,
       serverId,
       allowed: true,
@@ -176,6 +189,9 @@ const decision =
   }
 
   async discoverTools(): Promise<MCPTool[]> {
+    if (this.discoveredTools) {
+  return this.discoveredTools;
+}
 
     const discovered: MCPTool[] = [];
 
@@ -208,11 +224,7 @@ const decision =
         );
 
         const client =
-          await connectToServer(
-            server.command!,
-            server.args ?? [],
-            server.cwd
-          );
+  await this.getClient(server.id);
 
         console.log(
           "✅ Connected to",
@@ -257,6 +269,8 @@ discovered.push(discoveredTool);
       }
 
     }
+    this.discoveredTools = discovered;
+
 
     return discovered;
   }
