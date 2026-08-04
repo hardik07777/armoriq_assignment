@@ -222,18 +222,6 @@ npm run test       # Run tests
 
 ---
 
-# 📸 Screenshots
-
-Include screenshots for:
-
-- Dashboard
-- AI Chat Interface
-- Tool Approval Panel
-- MCP Server Management
-- Audit Logs
-- Policy Configuration
-
----
 
 # 🚧 Roadmap
 
