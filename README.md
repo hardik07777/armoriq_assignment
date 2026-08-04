@@ -1,159 +1,274 @@
-# Turborepo starter
+# 🛡️ ArmorIQ
 
-This Turborepo starter is maintained by the Turborepo core team.
+**ArmorIQ** is an enterprise-ready AI Agent Platform that enables Large Language Models to securely interact with external tools through the **Model Context Protocol (MCP)**. Every AI action is governed by a policy engine, approval workflows, and audit logs to ensure transparent, secure, and controlled automation.
 
-## Using this example
+> Secure AI Agents • MCP Integration • Policy Enforcement • Human Approval Workflows
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
+## ✨ Features
+
+### 🤖 AI Agent
+- Chat with an AI assistant powered by Gemini
+- Tool-aware conversations
+- Context-aware responses
+- Secure execution pipeline
+
+### 🔌 MCP (Model Context Protocol)
+- Connect custom MCP servers
+- Discover available tools dynamically
+- Execute external tools securely
+- Support for multiple MCP servers
+
+### 🔒 Policy Engine
+- Block sensitive tools
+- Require human approval before execution
+- Granular tool-level permissions
+- Organization-ready security controls
+
+### ✅ Approval Workflow
+- Pending approval queue
+- Approve or reject tool executions
+- Human-in-the-loop AI automation
+
+### 📊 Monitoring
+- Tool execution history
+- Audit logs
+- Real-time execution status
+- Error tracking
+
+### 🗂 File Operations
+Example MCP tools include:
+
+- Read Files
+- Write Files
+- Search Files
+- Delete Files
+- List Directory
+- Custom Tools
+
+---
+
+# 🏗 Architecture
+
+```
+                    +----------------------+
+                    |     Next.js UI       |
+                    +----------+-----------+
+                               |
+                               |
+                    REST API / Chat
+                               |
+                               ▼
+                   +-----------------------+
+                   |  Express Backend API  |
+                   +-----------+-----------+
+                               |
+                 +-------------+-------------+
+                 |                           |
+                 ▼                           ▼
+        Policy Engine                Gemini AI
+                 |
+                 ▼
+        Approval Service
+                 |
+                 ▼
+          MCP Manager
+                 |
+     -------------------------
+     |                       |
+     ▼                       ▼
+Custom MCP Server      External MCP Servers
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+# 🛠 Tech Stack
 
-### Apps and Packages
+## Frontend
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Backend
 
-### Utilities
+- Node.js
+- Express.js
+- TypeScript
 
-This Turborepo has some additional tools already setup for you:
+## Database
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- PostgreSQL
+- Prisma ORM
 
-### Build
+## AI
 
-To build all apps and packages, run the following command:
+- Google Gemini API
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+## Infrastructure
 
-```sh
-cd my-turborepo
-turbo build
+- Docker
+- Docker Compose
+
+## Protocol
+
+- Model Context Protocol (MCP)
+
+---
+
+# 📁 Project Structure
+
+```text
+ArmorIQ
+│
+├── apps
+│   ├── frontend
+│   ├── backend
+│   └── custom-mcp-server
+│
+├── packages
+│   ├── shared
+│   ├── config
+│   └── types
+│
+├── prisma
+│
+├── docker
+│
+└── README.md
 ```
 
-Without global `turbo`, use your package manager:
+---
 
-```sh
-cd my-turborepo
-npx turbo build
-npm dlx turbo build
-npm exec turbo build
+# 🔐 Security Features
+
+- Policy-based tool execution
+- Human approval workflow
+- Audit logging
+- Secure MCP communication
+- Tool access restrictions
+- Execution monitoring
+
+---
+
+# ⚙️ Installation
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/yourusername/armoriq.git
+
+cd armoriq
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## 2. Install Dependencies
 
-```sh
-turbo build --filter=docs
+```bash
+npm install
 ```
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
+## 3. Configure Environment Variables
+
+Create a `.env` file.
+
+```env
+DATABASE_URL=
+GEMINI_API_KEY=
+JWT_SECRET=
+PORT=5000
 ```
 
-### Develop
+---
 
-To develop all apps and packages, run the following command:
+## 4. Start Docker Services
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+```bash
+docker compose up -d
 ```
 
-Without global `turbo`, use your package manager:
+---
 
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
+## 5. Run Database Migrations
+
+```bash
+npx prisma migrate dev
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## 6. Start Development Server
 
-```sh
-turbo dev --filter=web
+```bash
+npm run dev
 ```
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
+# 🚀 Available Scripts
+
+```bash
+npm run dev        # Start all applications
+npm run build      # Build monorepo
+npm run lint       # Lint project
+npm run format     # Format code
+npm run test       # Run tests
 ```
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+# 📸 Screenshots
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Include screenshots for:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+- Dashboard
+- AI Chat Interface
+- Tool Approval Panel
+- MCP Server Management
+- Audit Logs
+- Policy Configuration
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+---
 
-```sh
-cd my-turborepo
-turbo login
-```
+# 🚧 Roadmap
 
-Without global `turbo`, use your package manager:
+- Multi-agent collaboration
+- Role-Based Access Control (RBAC)
+- Streaming AI responses
+- Plugin marketplace
+- OAuth providers
+- Tool analytics dashboard
+- Multi-tenant support
 
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
-```
+---
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+# 🤝 Contributing
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+Contributions are welcome!
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Fork the repository, create a feature branch, and submit a pull request.
 
-```sh
-turbo link
-```
+For major changes, please open an issue first to discuss your proposal.
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
-```
+# 👨‍💻 Author
 
-## Useful Links
+**Hardik Goel**
 
-Learn more about the power of Turborepo:
+GitHub: https://github.com/hardik07777
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+Portfolio: https://portfolio-hardik07.vercel.app/
+
+LinkedIn: https://linkedin.com/in/hardik-goel
+
+---
+
+# ⭐ Support
+
+If you found ArmorIQ useful, consider giving the repository a ⭐ on GitHub.
